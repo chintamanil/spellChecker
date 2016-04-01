@@ -34,7 +34,7 @@ module.exports = (function() {
      * @return {[type]}       [modified word]
      */
     function changeVowel(word, vowel, index) {
-        return word.substr(0, index) + vowel + word.substr(index + 1);
+        return word.slice(0, index).concat( vowel ).concat( word.slice(index + 1) );
     }
 
     /**
@@ -53,28 +53,29 @@ module.exports = (function() {
 
         function permute(prefix, str) {
             var n = str.length;
-            var i, temp, word, testWord, j, letter;
+            var i, temp, word, testWord, j, letter, tempWord;
 
             for (i = 0; i < n; i++) {
                 if (vowels.indexOf(str[i]) >= 0) {
                     temp = getVowels(str[i]);
                     for (j = 0; j < temp.length; j++) {
                         letter = temp[j];
-                        word = changeVowel(str.substring(i), letter, 0);
-                        testWord = prefix + str.substring(0, i) + word;
-                        if (trieInstance.find(testWord) && !res) {
-                            res = testWord;
+                        word = changeVowel(str.slice(i), letter, 0);
+                        testWord = prefix.concat( str.slice(0, i) ).concat( word );
+                        tempWord = testWord.join('');
+                        if (trieInstance.find(tempWord) && !res) {
+                            res = tempWord;
                             return res;
                         }
                         if (!res) {
-                            permute(prefix + str.substring(0, i) + word[0], word.substring(1));
+                            permute( prefix.concat( str.slice(0, i) ).concat( word[0] ), word.slice(1));
                         }
                     }
                 }
             }
             return res;
         }
-        return permute('', strIn);
+        return permute([], strIn.split(''));
     }
 
     /**
@@ -129,19 +130,19 @@ module.exports = (function() {
 
             obj = findCount(stringIn);
             while(obj && j < obj.count){
-                part1 = stringIn.substring(0, obj.prevIndex);
-                part2 = stringIn.substring(obj.prevIndex, obj.nextIndex - j);
-                part3 = stringIn.substring(obj.nextIndex, len);
-                temp = base + part1 + part2 + part3;
-                result.push(temp);
+                part1 = stringIn.slice(0, obj.prevIndex);
+                part2 = stringIn.slice(obj.prevIndex, obj.nextIndex - j);
+                part3 = stringIn.slice(obj.nextIndex, len);
+                temp = base.concat( part1 ).concat( part2 ).concat( part3 );
+                result.push(temp.join(''));
                 if(part3.length){
-                    permuteValues(base + part1 + part2, part3);
+                    permuteValues(base.concat( part1 ).concat( part2 ), part3);
                 }
                 j++;
             }
             return result;
         }
-        return permuteValues('', str);
+        return permuteValues([], str.split(''));
     }
 
     function randomNum(min, max){
@@ -167,13 +168,13 @@ module.exports = (function() {
 
     return {
         addLetterAtIndex: addLetterAtIndex,
-        getVowels: getVowels,
+        randomNum: randomNum,
         toLowerCase: toLowerCase,
         changeVowel: changeVowel,
         vowelChange: vowelChange,
         repeatValues: repeatValues,
+        getVowels: getVowels,
         findCount: findCount,
-        randomNum: randomNum,
         getVowel: getVowel
     };
 
