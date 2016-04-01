@@ -30,7 +30,9 @@ module.exports = (function() {
 
         // For validating when we change string with consecutive letter e.g ttt > tt > t
         validateMutiple: function(args, trieInstance, word ){
-            var check, i, listOfChecks;
+            var check, i;
+            var listOfChecks = false;
+
             if(args.multiple){
                 listOfChecks = utils.repeatValues(word);
                 for (i = listOfChecks.length - 1; i >= 0; i--) {

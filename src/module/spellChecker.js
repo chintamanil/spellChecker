@@ -3,15 +3,13 @@
     var Trie = require('./trie.js');
     var Validate = require('./validate.js');
 
+    // TODO use try catch here
     var file = require('fs').readFileSync('./../dict/string2.txt', 'utf8');
 
     /**
      * Function profides a Facde to the Validatie method for spell checking.
      *  First it checks it input string is in dictionary if not then it asks the Validate method to check
      *  if it can do spelling correction
-     *
-     * @param  {Object} )      {                                   var _dictonaries, _private;                var           _options [description]
-     * @param  {[type]} build: function(dictFile, dictType){                                         dictType [description]
      *
      * @return {[type]}        [description]
      */
@@ -35,7 +33,7 @@
                     if(_dictonaries[dictType].find(word.toLowerCase())){
                         return word;
                     }
-                } // add else loop TODO
+                } // add else loop TODO ?
 
                 // Runs through the Spell Checker
                 return Validate.checkSpelling(_options, _dictonaries[dictType], word);
@@ -46,11 +44,15 @@
                 // check if dictionary was already built. If so return that one. or add to that TODO
                 _dictonaries[dictType].build(dictFile);
             },
+
             add: function(word, dictType){
+                // TODO chechk typeof word and dictType
                 dictType = dictType || 'en';
                 _dictonaries[dictType].add(word);
             },
+
             setOptions: function( args ) {
+                // TODO write test for this
                 var each;
                 // check args type == obj TODO
                 for (each in args){

@@ -86,6 +86,7 @@ module.exports = (function() {
      * @return {[object]}     [if consecutive  returns ]
      */
     function findCount(str){
+        // TODO  can this be REFACTORED?
         var len = str.length, count = 0;
         var i = 0, j = 1, cur =  str[0], prev = '';
         while(prev !== cur && i < len - 1 ){

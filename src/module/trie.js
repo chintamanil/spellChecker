@@ -18,6 +18,7 @@
      * @param {[string]} str [e.g 'word1 word2 word3']
      */
     Trie.prototype.addSeries = function(str) {
+        // TODO check type of str add try catch
         var i;
         var words = str.split(' ');
         for (i = 0; i < words.length; i++) {
@@ -32,6 +33,7 @@
      * @param {[string]} word
      */
     Trie.prototype.add = function(word) {
+        // TODO check word type
         return this._add(word, this.trie, true);
     };
 
@@ -43,6 +45,7 @@
      * @return {[string]}      [found word]
      */
     Trie.prototype.find = function(word) {
+        // TODO check if word is a string
         return this._find(word, this.trie, false);
     };
 
@@ -54,6 +57,7 @@
      * @return {[string]}           [description]
      */
     Trie.prototype.findSpellErrorInCache = function(errorWord){
+        // TODO check if errorWord is  a string
         return this._find(errorWord, this.misspelledCache, true);
     };
 
@@ -65,6 +69,7 @@
      * @param {[string]} correctWord [correct word]
      */
     Trie.prototype.addSpellErrorInCache = function(errorWord, correctWord){
+        // TODO check type
         return this._add(errorWord, this.misspelledCache, {$: correctWord});
     };
 
