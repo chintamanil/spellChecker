@@ -3,25 +3,24 @@
 
     var chai = require('chai');
     var expect = chai.expect;
-    var file = require('fs').readFileSync('./src/dict/string2.txt', 'utf8');
+    var Reader = require('fs');
     var express = require('express');
     var Checker = require('./../src/module/spellChecker.js');
+    var file = Reader.readFileSync('./src/dict/string2.txt', 'utf8');
 
     describe('Spell Checker Testing', function() {
         describe('create dictionary', function() {
+
             beforeEach(function() {
                 Checker.build(file);
             });
 
-            afterEach(function() {
-                // nothing
-            });
             it('Check if "sleep" is in dictionary ', function() {
                 expect(Checker.find('sleep')).to.equal('sleep');
             });
 
             it('Check if "sleeeeep" is in dictionary ', function() {
-                expect(Checker.find('sleep')).to.equal('sleep');
+                expect(Checker.find('sleeeeep')).to.equal('sleep');
             });
 
             it('Check if "jjoobbb" is in dictionary ', function() {
@@ -36,5 +35,7 @@
                 expect(Checker.find('sleeple')).to.equal('NO CORRECTION');
             });
         });
+
     });
+
 })();

@@ -14,6 +14,10 @@ The program should print "> " as a prompt before reading each word, and should l
 >npm test
 ```
 
+# Run for prompt 
+```
+> node src/console.js
+```
 For example:
 
     $node ./spellcorrecter.js
