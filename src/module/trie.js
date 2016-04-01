@@ -21,10 +21,10 @@
         // TODO check type of str add try catch
         var i;
         var words = str.split(' ');
-        for (i = 0; i < words.length; i++) {
-            this._add(words[i], this.trie);
-        }
-        return this;
+        words.forEach(function(word){
+            this._add(word, this.trie);
+        });
+        return true;
     };
 
     /**
@@ -140,9 +140,9 @@
         var words = file.replace(/\n/g, '').split(' ');
         var i, word, l, cur;
 
+        cur = this.trie;
         for (i = 0, l = words.length; i < l; i++) {
             word = words[i];
-            cur = this.trie;
             this._add(word, cur);
         }
     };

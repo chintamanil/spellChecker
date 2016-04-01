@@ -1,5 +1,4 @@
 (function() {
-    // process.env.NODE_ENV = 'test';
 
     var chai = require('chai');
     var expect = chai.expect;
@@ -11,8 +10,9 @@
     describe('Spell Checker Testing', function() {
         describe('create dictionary', function() {
 
-            beforeEach(function() {
+            before(function() {
                 Checker.build(file);
+                Checker.add('conspiracy');
             });
 
             it('Check if "sleep" is in dictionary ', function() {

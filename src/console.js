@@ -21,14 +21,13 @@
     //
     prompt.start();
 
-    // TODO US command pattenr to call Checker ?
+    // TODO Use command pattenr to call Checker ?
     Checker.build(file);
-    // Checker.add('conspiracy');
+    Checker.add('conspiracy');
     // Checker.add('sleep');
     function ask() {
-        // Ask for name until user inputs 'done'
         text = 'Correct word is: ';
-        console.log('---------------------------------------------------------------------------------------------------------------')
+        console.log('---------------------------------------------------------------------------------------------------------------');
         console.log('Enter: "GTG" to exit OR press Enter to use previous word in Generator : ' + prevWord);
         console.log('Enter the Spelling to Check');
         prompt.get(['w'], function(err, result) {

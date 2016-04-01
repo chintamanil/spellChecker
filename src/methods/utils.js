@@ -157,12 +157,12 @@ module.exports = (function() {
 
     function addLetterAtIndex(word, letter, index, numberOftimes) {
         var i = 1;
-        var newLetter = letter;
+        var newLetter = [letter];
         while(i < numberOftimes){
-            newLetter += letter;
+            newLetter.push( letter);
             numberOftimes--;
         }
-        return word.substr(0, index) + newLetter + word.substr(index);
+        return word.slice(0, index).concat( newLetter).concat( word.slice(index));
     }
 
     return {

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run check",
-    "check": "node ./src/console.js",
+    "check": "node src/console.js",
     "test": "mocha test/test.js"
   },
   "author": "",
