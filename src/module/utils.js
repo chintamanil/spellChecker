@@ -1,10 +1,19 @@
 module.exports = (function() {
 
+    /**
+     * Function takes a vowel 'aeiou'. It returns an array of vowels excluding the current vowel
+     *
+     * @param  {[string]} letter    [vowel]
+     * @param  {[string]} caseCheck [true= lower case]
+     *
+     * @return {[array]}           [array of vowels excluding input vowel]
+     */
     function getVowels(letter, caseCheck) {
         var VOWELS_LOWER = 'aeiou';
         var VOWELS_UPPER = 'AEIOU';
         var index = caseCheck ? VOWELS_UPPER.indexOf(letter) : VOWELS_LOWER.indexOf(letter);
 
+        // check if index = '-1' means letter is not a vowel. In that case return false
         if (caseCheck) {
             return VOWELS_UPPER.substr(0, index) + VOWELS_UPPER.substr(index + 1).split('');
         }
@@ -15,10 +24,29 @@ module.exports = (function() {
         return word.toLowerCase();
     }
 
+    /**
+     * for a given word it changes at the given index it replaces the letter with input vowel.
+     *
+     * @param  {[string]} word  input word
+     * @param  {string} vowel vowel to replace at index
+     * @param  {number} index index at which vowel needs to be replaced
+     *
+     * @return {[type]}       [modified word]
+     */
     function changeVowel(word, vowel, index) {
         return word.substr(0, index) + vowel + word.substr(index + 1);
     }
 
+    /**
+     * Function takes an input string and trie data structure.
+     * It checks each letter in the string. If it a vowel it changes it to other vowel and tries to find
+     * match in trieInstance
+     *
+     * @param  {[string]} strIn        [Input String to Check]
+     * @param  {[Trie]} trieInstance [Instance of Trie Data Structure]
+     *
+     * @return {[string]}              [returns found string after vowel change OR returns false if not found]
+     */
     function vowelChange(strIn, trieInstance) {
         var vowels = 'aeiou';
         var res = false;
@@ -49,6 +77,14 @@ module.exports = (function() {
         return permute('', strIn);
     }
 
+    /**
+     * Function iterates over a string to see if any letter is in a consecutive order.
+     * If so it returns count & start end Index of that letter
+     *
+     * @param  {[string]} str [input string]
+     *
+     * @return {[object]}     [if consecutive  returns ]
+     */
     function findCount(str){
         var len = str.length, count = 0;
         var i = 0, j = 1, cur =  str[0], prev = '';
@@ -72,6 +108,16 @@ module.exports = (function() {
         };
     }
 
+    /**
+     * If a string has constitutive letters it keeps reducing the count of that letter by 1 and adds to array.
+     * It dose this in s recursive manner so strings like 'ttoo' are  treaded as shown in @example
+     *
+     * @param  {[string]} str [input string]
+     *
+     * @return {[array]}     [resulting array]
+     *
+     * @example  {'tttoo'}   ['ttoo', 'too', 'tto', 'to']
+     */
     function repeatValues(str){
         var result = [];
         function permuteValues(base, stringIn){
