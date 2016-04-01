@@ -4,6 +4,16 @@ Write a program in JavaScript that reads a large list of English words (e.g. fro
 
 The program should print "> " as a prompt before reading each word, and should loop until killed.
 
+# Installation
+```
+>npm install
+```
+
+# Run Test
+```
+>npm test
+```
+
 For example:
 
     $node ./spellcorrecter.js
