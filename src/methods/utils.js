@@ -9,15 +9,15 @@ module.exports = (function() {
      * @return {[array]}           [array of vowels excluding input vowel]
      */
     function getVowels(letter, caseCheck) {
-        var VOWELS_LOWER = 'aeiou';
-        var VOWELS_UPPER = 'AEIOU';
+        var VOWELS_LOWER = ['a', 'e', 'i', 'o', 'u'];
+        var VOWELS_UPPER = ['A', 'E', 'I', 'O', 'U'];
         var index = caseCheck ? VOWELS_UPPER.indexOf(letter) : VOWELS_LOWER.indexOf(letter);
 
         // check if index = '-1' means letter is not a vowel. In that case return false
         if (caseCheck) {
-            return VOWELS_UPPER.substr(0, index) + VOWELS_UPPER.substr(index + 1).split('');
+            return VOWELS_UPPER.slice(0, index).concat( VOWELS_UPPER.substr(index + 1) );
         }
-        return (VOWELS_LOWER.substr(0, index) + VOWELS_LOWER.substr(index + 1)).split('');
+        return VOWELS_LOWER.slice(0, index).concat( VOWELS_LOWER.substr(index + 1) );
     }
 
     function toLowerCase(word) {
