@@ -6,13 +6,14 @@
   "scripts": {
     "start": "npm run check",
     "check": "node ./src/console.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test/test.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "chai": "^3.5.0",
     "colors": "^1.1.2",
+    "express": "^4.13.4",
     "mocha": "^2.4.5",
     "prompt": "^1.0.0"
   }
