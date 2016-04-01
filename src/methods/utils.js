@@ -87,15 +87,16 @@ module.exports = (function() {
      */
     function findCount(str){
         // TODO  can this be REFACTORED?
-        var len = str.length, count = 0;
+        var len = str.length - 1, count = 0;
         var i = 0, j = 1, cur =  str[0], prev = '';
-        while(prev !== cur && i < len - 1 ){
+
+        while(prev !== cur && i <= len ){
             prev = cur;
             i++;
             cur = str[i];
         }
         prev = i - 1;
-        while(str[i] === cur && i < len - 1){
+        while(str[i] === cur && i <= len){
             i++;
         }
         count = i - prev;
@@ -126,9 +127,6 @@ module.exports = (function() {
             var j = 1;
             var len = stringIn.length;
 
-            if(stringIn.length <= 1){
-                return false;
-            }
             obj = findCount(stringIn);
             while(obj && j < obj.count){
                 part1 = stringIn.substring(0, obj.prevIndex);
@@ -136,7 +134,9 @@ module.exports = (function() {
                 part3 = stringIn.substring(obj.nextIndex, len);
                 temp = base + part1 + part2 + part3;
                 result.push(temp);
-                permuteValues(base + part1 + part2, part3);
+                if(part3.length){
+                    permuteValues(base + part1 + part2, part3);
+                }
                 j++;
             }
             return result;
@@ -144,13 +144,37 @@ module.exports = (function() {
         return permuteValues('', str);
     }
 
+    function randomNum(min, max){
+        return Math.round(Math.random() * (max - min) + min);
+    }
+
+    function getVowel(letter){
+        var vowels = getVowels(letter, false);
+        var random = randomNum(0, vowels.length - 1);
+
+        return vowels[random];
+    }
+
+    function addLetterAtIndex(word, letter, index, numberOftimes) {
+        var i = 1;
+        var newLetter = letter;
+        while(i < numberOftimes){
+            newLetter += letter;
+            numberOftimes--;
+        }
+        return word.substr(0, index) + newLetter + word.substr(index);
+    }
+
     return {
+        addLetterAtIndex: addLetterAtIndex,
         getVowels: getVowels,
         toLowerCase: toLowerCase,
         changeVowel: changeVowel,
         vowelChange: vowelChange,
         repeatValues: repeatValues,
-        findCount: findCount
+        findCount: findCount,
+        randomNum: randomNum,
+        getVowel: getVowel
     };
 
 })();
