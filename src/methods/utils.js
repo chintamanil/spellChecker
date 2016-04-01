@@ -13,7 +13,7 @@ module.exports = (function() {
         var VOWELS_UPPER = ['A', 'E', 'I', 'O', 'U'];
         var index = caseCheck ? VOWELS_UPPER.indexOf(letter) : VOWELS_LOWER.indexOf(letter);
 
-        // check if index = '-1' means letter is not a vowel. In that case return false
+        // TODO check if index = '-1' means letter is not a vowel. In that case return false
         if (caseCheck) {
             return VOWELS_UPPER.slice(0, index).concat( VOWELS_UPPER.slice(index + 1) );
         }
@@ -130,9 +130,9 @@ module.exports = (function() {
 
             obj = findCount(stringIn);
             while(obj && j < obj.count){
-                part1 = stringIn.slice(0, obj.prevIndex);
-                part2 = stringIn.slice(obj.prevIndex, obj.nextIndex - j);
-                part3 = stringIn.slice(obj.nextIndex, len);
+                part1 = stringIn.slice(0, obj.prevIndex);                           // part before consecutive letters
+                part2 = stringIn.slice(obj.prevIndex, obj.nextIndex - j);   // part with consecutive letters-j
+                part3 = stringIn.slice(obj.nextIndex, len);                        // part after consecutive letters
                 temp = base.concat( part1 ).concat( part2 ).concat( part3 );
                 result.push(temp.join(''));
                 if(part3.length){

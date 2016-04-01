@@ -4,9 +4,10 @@
     var colors = require('colors/safe');
     var Checker = require('./module/spellChecker.js');
     var generator = require('./generator/generator.js');
-    var fileName = './src/dict/string2.txt';
     var Reader = require('fs');
     var express = require('express');
+
+    var fileName = './src/dict/string2.txt';
     var file = Reader.readFileSync(fileName, 'utf8');
 
     var checkWordResults = '';
@@ -25,6 +26,31 @@
     Checker.build(file);
     Checker.add('conspiracy');
     // Checker.add('sleep');
+
+    function findWord(word) {
+        console.log('Word tried: ' + word);
+        checkWordResults = Checker.find(word);
+        if (checkWordResults !== 'NO CORRECTION') {
+            if (word === checkWordResults) {
+                text = 'Word is in dictionary: ';
+            }
+            prevWord = word;
+            console.log(text + checkWordResults);
+        } else {
+            console.log(checkWordResults);
+        }
+    }
+
+    function generateWordAndCheck(){
+        console.log('Reusing previous word: ' + prevWord);
+        modified = generator(prevWord);
+        console.log('Modfied word by generator: ' + modified);
+        text = 'Correct word after gnerator : ';
+        checkWordResults = Checker.find(modified);
+        // add if loop
+        console.log(text + checkWordResults);
+    }
+
     function ask() {
         text = 'Correct word is: ';
         console.log('---------------------------------------------------------------------------------------------------------------');
@@ -34,34 +60,18 @@
             if (result.w === 'GTG') {
                 console.log('We are done.');
             } else {
-                if(result.w){
-                    console.log('Word tried: ' + result.w);
-                    checkWordResults = Checker.find(result.w);
-                    if (checkWordResults !== 'NO CORRECTION') {
-                        if (result.w === checkWordResults) {
-                            text = 'Word is in dictionary: ';
-                        }
-                        prevWord = result.w;
-                        console.log(text + checkWordResults);
-                    } else {
-                        console.log(checkWordResults);
-                    }
-                }else{
-                    console.log('Reusing previous word: ' + prevWord);
-                    modified = generator(prevWord);
-                    console.log('Modfied word by generator: ' + modified);
-                    text = 'Correct word after gnerator : ';
-                    checkWordResults = Checker.find(modified);
-                    console.log(text + checkWordResults);
+                if (result.w) {
+                    findWord(result.w);
+                } else {
+                    generateWordAndCheck();
                 }
                 ask();
             }
-        // if(err){
-        //     console.log('Error:' + err);
-        // }
         });
     }
 
     ask();
+
+
 
 })();
