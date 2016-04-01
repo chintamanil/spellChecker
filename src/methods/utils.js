@@ -15,9 +15,9 @@ module.exports = (function() {
 
         // check if index = '-1' means letter is not a vowel. In that case return false
         if (caseCheck) {
-            return VOWELS_UPPER.slice(0, index).concat( VOWELS_UPPER.substr(index + 1) );
+            return VOWELS_UPPER.slice(0, index).concat( VOWELS_UPPER.slice(index + 1) );
         }
-        return VOWELS_LOWER.slice(0, index).concat( VOWELS_LOWER.substr(index + 1) );
+        return VOWELS_LOWER.slice(0, index).concat( VOWELS_LOWER.slice(index + 1) );
     }
 
     function toLowerCase(word) {
