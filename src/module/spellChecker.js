@@ -1,7 +1,7 @@
 (function() {
 
     var Trie = require('./trie.js');
-    var Validate = require('./validate.js');
+    var Validate = require('./../methods/validate.js');
 
     // TODO use try catch here
     var file = require('fs').readFileSync('./../dict/string2.txt', 'utf8');
@@ -77,12 +77,13 @@
 
     })();
 
-    Checker.add('conspiracy');
-    Checker.build(file);
-    console.log(
-        Checker.find('sleeeep'),
-        Checker.find('weke'),
-        Checker.find('sheeple')
-        )
+    // Every file was tested with unit tests inside that file as below
+    // Checker.add('conspiracy');
+    // Checker.build(file);
+    // console.log(
+    //     Checker.find('sleeeep'),
+    //     Checker.find('weke'),
+    //     Checker.find('sheeple')
+    //     )
 
 })();
